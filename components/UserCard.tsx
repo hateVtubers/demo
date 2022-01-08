@@ -12,7 +12,6 @@ export const UserCard = () => {
     // @ts-ignore
     mutate({ ...data });
   };
-  console.log(data);
   if (!data)
     return (
       <div className="absolute top-4 left-4 bg-slate-900 p-1 rounded-lg flex items-center justify-center flex-col w-32 h-36 overflow-hidden">
