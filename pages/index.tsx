@@ -46,7 +46,7 @@ const Home: NextPage = ({ user }: { user: any }) => {
       <footer className="absolute bottom-5 left-0 right-0">
         <Link href={"/api/auth/login"}>
           <a className="text-center block hover:text-neutral-500 transition-colors" target={"_blank"}>
-            view json in "api/auth/[...login]"
+            {`view json in "api/auth/[...login]"`}
           </a>
         </Link>
       </footer>
