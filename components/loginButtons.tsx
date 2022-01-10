@@ -1,18 +1,14 @@
-import type { Auth } from "firebase/auth";
-import { loginWith } from "next-firebase-auth-cookies";
+import type { User } from "next-firebase-auth-cookies";
 
 type Props = {
-  auth: Auth;
-  provider: any;
+  onClick: any;
   content: string;
 };
 
-export const LoginButtons = ({ auth, provider, content }: Props) => {
+export const LoginButtons = ({ onClick, content }: Props) => {
   return (
     <button
-      onClick={() => {
-        loginWith(auth, provider);
-      }}
+      onClick={onClick}
       className="bg-slate-800 hover:bg-slate-900 text-white font-bold py-2 px-4 rounded transition-colors"
     >
       login with {content}

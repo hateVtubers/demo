@@ -1,10 +1,11 @@
 import { initializeApp } from "firebase/app";
 import {
-  Auth,
   getAuth,
   GithubAuthProvider,
   GoogleAuthProvider,
+  signInWithPopup,
 } from "firebase/auth";
+import { signIn } from "next-firebase-auth-cookies";
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -18,12 +19,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 
-type A = {
-  google: [Auth, GoogleAuthProvider];
-  github: [Auth, GithubAuthProvider];
-};
-
-export const providers: A = {
-  google: [auth, new GoogleAuthProvider()],
-  github: [auth, new GithubAuthProvider()],
+export const providers = {
+  google: () => signInWithPopup(auth, new GoogleAuthProvider()).then(signIn),
+  github: () => signInWithPopup(auth, new GithubAuthProvider()).then(signIn),
 };

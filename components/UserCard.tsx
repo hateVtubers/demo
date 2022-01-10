@@ -2,15 +2,14 @@ import type { User } from "next-firebase-auth-cookies";
 import Image from "next/image";
 import useSWR, { useSWRConfig } from "swr";
 import { Loading } from "components/Loading";
-import { logout } from "next-firebase-auth-cookies";
+import { signOut } from "next-firebase-auth-cookies";
 import { auth } from "firebase.config";
 
 export const UserCard = () => {
   const { data, mutate } = useSWR<User>("/api/auth/login");
   const handlerLogout = () => {
-    logout(auth);
-    // @ts-ignore
-    mutate({ ...data });
+    signOut(auth);
+    mutate();
   };
   if (!data)
     return (

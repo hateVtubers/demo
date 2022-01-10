@@ -23,9 +23,9 @@ const Home: NextPage = ({ user }: InferGetServerSidePropsType<typeof getServerSi
             {"Hi you're not loged"}
           </h1>
           <List customClassName="gap-4">
-            {Object.entries(providers).map(([key, [auth, provider]]) => (
+            {Object.entries(providers).map(([key, value]) => (
               <li key={key}>
-                <LoginButtons auth={auth} provider={provider} content={key} />
+                <LoginButtons onClick={value} content={key} />
               </li>
             ))}
           </List>
@@ -46,7 +46,7 @@ const Home: NextPage = ({ user }: InferGetServerSidePropsType<typeof getServerSi
 };
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
-  const user: User = await getAuthCookieProps(req, res);
+  const user: User = getAuthCookieProps({ req, res });
   return {
     props: {
       user,
