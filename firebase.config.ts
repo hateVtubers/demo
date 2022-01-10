@@ -20,6 +20,6 @@ const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 
 export const providers = {
-  google: () => signInWithPopup(auth, new GoogleAuthProvider()).then(signIn),
-  github: () => signInWithPopup(auth, new GithubAuthProvider()).then(signIn),
+  google: () => signInWithPopup(auth, new GoogleAuthProvider()).then(signIn).catch(() => {}),
+  github: () => signInWithPopup(auth, new GithubAuthProvider()).then(signIn).catch(() => {}),
 };
