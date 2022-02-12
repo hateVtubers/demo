@@ -1,5 +1,3 @@
-import type { User } from "next-firebase-auth-cookies";
-
 type Props = {
   onClick: any;
   content: string;
