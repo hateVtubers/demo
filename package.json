@@ -11,7 +11,7 @@
     "firebase": "^9.6.2",
     "firebase-admin": "^10.0.2",
     "next": "12.0.7",
-    "next-firebase-auth-cookies": "^3.0.5",
+    "next-firebase-auth-cookies": "^3.1.7",
     "react": "17.0.2",
     "react-dom": "17.0.2"
   },

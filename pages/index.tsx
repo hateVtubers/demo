@@ -2,23 +2,25 @@ import type { GetServerSideProps, NextPage } from "next";
 import { providers } from "auth/client";
 import { LoginButtons } from "components/loginButtons";
 import { List } from "components/List";
-import { DecodedIdToken } from "firebase-admin/auth";
-import { useAuth, getSessionUser } from "next-firebase-auth-cookies";
+import { useAuth, userSessionState } from "next-firebase-auth-cookies";
 import { auth } from "auth/client";
+import { UserServer } from "next-firebase-auth-cookies/types";
 
 type Props = {
-  userSessionState: DecodedIdToken;
+  userSSR: UserServer;
 };
 
-const Home: NextPage<Props> = ({ userSessionState }) => {
-  const { user } = useAuth({ auth, userSSR: userSessionState });
-  console.log({ user });
+const Home: NextPage<Props> = ({ userSSR }) => {
+  const { user, loading } = useAuth({ auth, userSSR });
+  console.log({ userClient: user, userServer: userSSR, loading });
   return (
     <div>
       {user?.uid ? (
-        <h1 className="font-medium text-lg text-center mb-4">
-          {"Hi you're loged"}
-        </h1>
+        <>
+          <h1 className="font-medium text-lg text-center mb-4">
+            {"Hi you're loged"}
+          </h1>
+        </>
       ) : (
         <>
           <h1 className="font-medium text-lg text-center">
@@ -39,10 +41,11 @@ const Home: NextPage<Props> = ({ userSessionState }) => {
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   const { auth } = await import("auth/server");
-  const userSessionState = await getSessionUser(auth, { req, res });
+  const { user } = await userSessionState(auth, { req, res });
+
   return {
     props: {
-      userSessionState: userSessionState ?? null,
+      userSSR: user,
     },
   };
 };

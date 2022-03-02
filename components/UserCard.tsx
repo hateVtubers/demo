@@ -1,13 +1,13 @@
 import { useAuth } from "next-firebase-auth-cookies";
 import Image from "next/image";
 import { Loading } from "components/Loading";
-import { signOut } from "next-firebase-auth-cookies";
+import { signOut } from "next-firebase-auth-cookies/auth";
 import { auth } from "auth/client";
 
 export const UserCard = () => {
-  const { user } = useAuth({ auth });
+  const { user, loading } = useAuth({ auth });
 
-  if (typeof user === "undefined")
+  if (loading)
     return (
       <div className="absolute top-4 left-4 bg-slate-900 p-1 rounded-lg flex items-center justify-center flex-col w-32 h-36 overflow-hidden">
         <Loading width={55} height={55} />
